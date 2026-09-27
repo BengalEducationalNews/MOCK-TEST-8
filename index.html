@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Science Mock Test - 08 | Bengal Educational News</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            min-height: 100vh;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        header {
+            text-align: center;
+            border-bottom: 3px solid #0056b3;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        header h1 {
+            color: #0056b3;
+            margin: 0;
+            font-size: 24px;
+        }
+        header p {
+            color: #555;
+            font-weight: bold;
+            margin: 5px 0 0 0;
+        }
+        .exam-date {
+            background: #e2e8f0;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #333;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .contact-highlight {
+            display: inline-block;
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .contact-highlight span {
+            color: #d9534f;
+        }
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .nav-btn {
+            padding: 10px 25px;
+            background-color: #eef2f7;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        .nav-btn.active {
+            background-color: #0056b3;
+            color: white;
+            border-color: #0056b3;
+        }
+        .portal-section {
+            display: none;
+        }
+        .portal-section.active {
+            display: block;
+        }
+        .reg-card {
+            background: #fdfefe;
+            padding: 25px;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #444;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        .start-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .start-btn:hover {
+            background-color: #218838;
+        }
+        #quizBox {
+            display: none;
+        }
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            background: #e9ecef;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .timer {
+            color: #dc3545;
+        }
+        .question-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 15px;
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+        .options-list li {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .options-list li:hover {
+            background: #e2e6ea;
+            border-color: #0056b3;
+        }
+        .options-list li.selected {
+            background: #d1ecf1;
+            border-color: #bee5eb;
+            font-weight: bold;
+        }
+        .next-btn {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            float: right;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .next-btn:hover {
+            background-color: #004085;
+        }
+        .msg-box {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 25px;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            line-height: 1.6;
+            font-size: 16px;
+            text-align: center;
+        }
+        .result-btn {
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .result-btn:hover {
+            background-color: #e0a800;
+        }
+        #resultContainer {
+            display: none;
+            margin-top: 25px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        .ans-card {
+            background: #f8f9fa;
+            border-left: 5px solid #0056b3;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            text-align: left;
+        }
+        .ans-card.correct {
+            border-left-color: #28a745;
+        }
+        .ans-card.wrong {
+            border-left-color: #dc3545;
+        }
+        .promo-box {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .promo-box a {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #0056b3;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
+
+<div class="container">
+    <header>
+        <h1>BENGAL EDUCATIONAL NEWS</h1>
+        <p>Librarian হওয়ার স্বপ্নে,সঠিক প্রস্তুতির সঙ্গে.</p>
+        <div class="exam-date">📅 Exam Date: 27/09/2026</div><br>
+        <div class="contact-highlight">
+            📱 WhatsApp: <span>9932948196</span> &nbsp;|&nbsp; 📧 Email: <span>bengaleducationalnews@gmail.com</span>
+        </div>
+    </header>
+
+    <div class="nav-tabs">
+        <button class="nav-btn active" onclick="switchPortal(event, 'student')">Student Mock Test - 08</button>
+        <button class="nav-btn" onclick="switchPortal(event, 'admin')">Admin Panel (Password Protected)</button>
+    </div>
+
+    <!-- ================= STUDENT PORTAL ================= -->
+    <div id="studentPortal" class="portal-section active">
+        <form id="quizForm" action="https://formspree.io/f/moevdzqo" method="POST">
+            <input type="hidden" name="Student_Name" id="fsName">
+            <input type="hidden" name="Mobile_Number" id="fsMobile">
+            <input type="hidden" name="District" id="fsDistrict">
+            <input type="hidden" name="Attempted_Mock_Test" id="fsTestNo">
+            <input type="hidden" name="Correct_Answers" id="fsCorrect">
+            <input type="hidden" name="Wrong_Answers" id="fsWrong">
+            <input type="hidden" name="Total_Marks" id="fsMarks">
+
+            <div id="regBox" class="reg-card">
+                <h3 style="color: #0056b3; margin-top: 0;">Student Registration (Mock Test - 08)</h3>
+                <p style="font-size: 13px; color: #666;">Enter your details to start the exam.</p>
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" id="regName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="regMobile" placeholder="Enter your 10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+                <div class="form-group">
+                    <label>District Name</label>
+                    <input type="text" id="regDistrict" placeholder="Enter your district name" required>
+                </div>
+                <div class="form-group">
+                    <label>Which Mock Test are you attempting?</label>
+                    <select id="regTestNo" required>
+                        <option value="">Select Mock Test Number</option>
+                    </select>
+                </div>
+                <button type="button" class="start-btn" onclick="startQuiz()">Start Mock Test - 08</button>
+            </div>
+        </form>
+
+        <div id="quizBox">
+            <div class="quiz-header">
+                <span id="qIndicator">Question: 1 / 14</span>
+                <span class="timer">Time Left: <span id="timeLeft">15</span>s</span>
+            </div>
+            <div class="question-title" id="questionText">Loading question...</div>
+            <ul class="options-list" id="optionsList"></ul>
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+        </div>
+
+        <div id="successMsg" class="msg-box">
+            <strong>Thank you! Your Mock Test - 08 has been successfully completed.</strong><br><br>
+            Click the button below to check your score and answer sheet.<br>
+            <button class="result-btn" onclick="showResultModal()">📊 View Result & Answer Sheet</button>
+        </div>
+
+        <!-- Result & Detailed Answer Sheet Container -->
+        <div id="resultContainer"></div>
+    </div>
+
+    <!-- ================= ADMIN PORTAL ================= -->
+    <div id="adminPortal" class="portal-section">
+        <h3 style="color: #0056b3; margin-bottom: 15px;">Admin Dashboard (Mock Test - 08 Submissions)</h3>
+        <div style="overflow-x: auto;">
+            <table id="adminTable">
+                <thead>
+                    <tr>
+                        <th>SL No.</th>
+                        <th>Student Name</th>
+                        <th>Mobile Number</th>
+                        <th>District</th>
+                        <th>Test No</th>
+                        <th>Correct</th>
+                        <th>Wrong</th>
+                        <th>Total Marks (Out of 14)</th>
+                        <th>Status</th>
+                        <th>Exam Date</th>
+                    </tr>
+                </thead>
+                <tbody id="adminTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Populate Mock Test dropdown from 1 to 30
+    const testSelect = document.getElementById('regTestNo');
+    for (let i = 1; i <= 30; i++) {
+        let opt = document.createElement('option');
+        let testName = "Mock Test - " + (i < 10 ? "0" + i : i);
+        opt.value = testName;
+        opt.textContent = testName;
+        testSelect.appendChild(opt);
+    }
+    testSelect.value = "Mock Test - 08";
+
+    // Blocked Students List
+    const blockedStudents = [
+        { name: "Md Ismail", mobile: "9635186555" },
+        { name: "Purusottam Chatterjee", mobile: "8327325283" },
+        { name: "Rupam Ghosh", mobile: "7029676893" }
+    ];
+
+    // Original Mock Test Questions (from Test 07 structure)
+    const questions = [
+        {
+            q: "1. ‘Grammar of Classification’ গ্রন্থটি কার লেখা?<br><span style='font-size:14px; color:#555;'>('Grammar of Classification' Book Writer?)</span>",
+            options: ["A. J. D. Brown", "B. E. A. Baker", "C. W. C. Sayers", "D. H. E. Bliss"],
+            answer: 2
+        },
+        {
+            q: "2. ‘Subject Classification’ কে প্রবর্তন করেন?<br><span style='font-size:14px; color:#555;'>('Subject Classification' Introduced by?)</span>",
+            options: ["A. Melvil Dewey", "B. J. D. Brown", "C. W. C. Bisseton", "D. E. A. Baker"],
+            answer: 1
+        },
+        {
+            q: "3. Colon Classification প্রথম প্রকাশিত হয়—<br><span style='font-size:14px; color:#555;'>(Colon Classification First Published in?)</span>",
+            options: ["A. ১৯০৫ খ্রিষ্টাব্দে", "B. ১৯২৮ খ্রিষ্টাব্দে", "C. ১৯৩৩ খ্রিষ্টাব্দে", "D. ১৯৩৫ খ্রিষ্টাব্দে"],
+            answer: 2
+        },
+        {
+            q: "4. Which is the smallest unit of data in a computer?<br><span style='font-size:14px; color:#555;'>(কম্পিউটারে তথ্যের সবচেয়ে ছোট একক কোনটি?)</span>",
+            options: ["A. Byte", "B. Bit", "C. Nibble", "D. Word"],
+            answer: 1
+        },
+        {
+            q: "5. One Kilobyte (1 KB) = ?<br><span style='font-size:14px; color:#555;'>(১ কিলোবাইট কত বাইট?)</span>",
+            options: ["A. 1000 Bytes", "B. 1024 Bytes", "C. 100 Bytes", "D. 2048 Bytes"],
+            answer: 1
+        },
+        {
+            q: "6. MS-Word is an example of—<br><span style='font-size:14px; color:#555;'>(MS-Word কী ধরনের সফটওয়্যার?)</span>",
+            options: ["A. System Software", "B. Application Software", "C. Utility Software", "D. Operating System"],
+            answer: 1
+        },
+        {
+            q: "7. Which memory is volatile?<br><span style='font-size:14px; color:#555;'>(কোন মেমোরি ভোলাটাইল?)</span>",
+            options: ["A. ROM", "B. RAM", "C. Hard Disk", "D. CD-ROM"],
+            answer: 1
+        },
+        {
+            q: "8. What type of device is a Pendrive?<br><span style='font-size:14px; color:#555;'>(Pendrive কী ধরনের ডিভাইস?)</span>",
+            options: ["A. Input Device", "B. Output Device", "C. Storage Device", "D. Processing Device"],
+            answer: 2
+        },
+        {
+            q: "9. Which commission emphasized the importance of School Libraries in India?<br><span style='font-size:14px; color:#555;'>(ভারতে কোন কমিশন School Library-এর গুরুত্বের উপর জোর দিয়েছিল?)</span>",
+            options: ["A. University Education Commission (1948-49)", "B. Secondary Education Commission (1952-53)", "C. Kothari Commission (1964-66)", "D. Mudaliar Commission (1952)"],
+            answer: 1
+        },
+        {
+            q: "10. Which is not a programming language?<br><span style='font-size:14px; color:#555;'>(নীচের কোনটি প্রোগ্রামিং ভাষা নয়?)</span>",
+            options: ["A. FORTRAN", "B. BASIC", "C. COBOL", "D. ASCII"],
+            answer: 3
+        },
+        {
+            q: "11. কোনটি লাইব্রেরি ম্যানেজমেন্টের অংশ নয়?<br><span style='font-size:14px; color:#555;'>(Which is not part of library management?)</span>",
+            options: ["A. পরিকল্পনা", "B. সংগ্রহনীতি", "C. ব্যবস্থাপনা", "D. উপস্থাপনা"],
+            answer: 3
+        },
+        {
+            q: "12. “POSDCORB” শব্দটি লাইব্রেরি ম্যানেজমেন্টের কোন দিককে বোঝায়?<br><span style='font-size:14px; color:#555;'>(POSDCORB stands for management aspect?)</span>",
+            options: ["A. সংগ্রহনীতি", "B. ব্যবস্থাপনার কার্যাবলি", "C. ক্যাটালগিং পদ্ধতি", "D. শ্রেণীবিন্যাস"],
+            answer: 1
+        },
+        {
+            q: "13. AACR-এর পূর্ণরূপ কী?<br><span style='font-size:14px; color:#555;'>(Full form of AACR?)</span>",
+            options: ["A. Anglo-American Classification Rules", "B. Anglo-American Cataloging Rules", "C. American-Anglo Cataloging Rules", "D. Association for Anglo Rules"],
+            answer: 1
+        },
+        {
+            q: "14. Imperial Library সাধারণ মানুষের জন্য উন্মুক্ত হয় কোন সালে?<br><span style='font-size:14px; color:#555;'>(Imperial Library opened for public in?)</span>",
+            options: ["A. ১৯৫৩", "B. ১৯৪৮", "C. ১৯০২", "D. ১৯০৩"],
+            answer: 3
+        }
+    ];
+
+    let currentStudent = {};
+    let currentQIndex = 0;
+    let score = 0;
+    let wrongAnswers = 0;
+    let selectedOption = null;
+    let studentAnswers = [];
+    let timer;
+    let timeLeft = 15;
+    let submissions = JSON.parse(localStorage.getItem('mockSubmissions_test8')) || [];
+
+    function switchPortal(e, portal) {
+        if (portal === 'admin') {
+            let pass = prompt("Enter Admin Password:");
+            if (pass !== "ANI@2022") {
+                alert("Incorrect Password! Access Denied.");
+                return;
+            }
+            loadAdminTable();
+        }
+
+        document.querySelectorAll('.portal-section').forEach(sec => sec.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+        if (portal === 'student') {
+            document.getElementById('studentPortal').classList.add('active');
+            e.target.classList.add('active');
+        } else {
+            document.getElementById('adminPortal').classList.add('active');
+            e.target.classList.add('active');
+        }
+    }
+
+    function startQuiz() {
+        const name = document.getElementById('regName').value.trim();
+        const mobile = document.getElementById('regMobile').value.trim();
+        const district = document.getElementById('regDistrict').value.trim();
+        const testNo = document.getElementById('regTestNo').value;
+
+        if (!name || !mobile || !district || !testNo) {
+            alert("Please fill in all registration details!");
+            return;
+        }
+
+        // Check if student is blocked
+        let isBlocked = blockedStudents.some(student => student.mobile === mobile);
+        if (isBlocked) {
+            alert("You are not allowed to attempt this mock test. Contact: 9932948196");
+            return;
+        }
+
+        currentStudent = { 
+            name, 
+            mobile, 
+            district, 
+            testNo,
+            correct: 0, 
+            wrong: 0, 
+            totalMarks: 0, 
+            date: "27/09/2026",
+            status: "In Progress"
+        };
+
+        submissions.push(currentStudent);
+        localStorage.setItem('mockSubmissions_test8', JSON.stringify(submissions));
+
+        currentQIndex = 0;
+        score = 0;
+        wrongAnswers = 0;
+        studentAnswers = [];
+
+        document.getElementById('regBox').style.display = 'none';
+        document.getElementById('quizBox').style.display = 'block';
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        clearInterval(timer);
+        timeLeft = 15;
+        document.getElementById('timeLeft').textContent = timeLeft;
+
+        if (currentQIndex >= questions.length) {
+            finishQuiz();
+            return;
+        }
+
+        document.getElementById('qIndicator').textContent = `Question: ${currentQIndex + 1} / ${questions.length}`;
+        const qObj = questions[currentQIndex];
+        document.getElementById('questionText').innerHTML = qObj.q;
+
+        const optionsList = document.getElementById('optionsList');
+        optionsList.innerHTML = '';
+        selectedOption = null;
+
+        qObj.options.forEach((opt, idx) => {
+            const li = document.createElement('li');
+            li.innerHTML = opt;
+            li.onclick = () => {
+                document.querySelectorAll('.options-list li').forEach(el => el.classList.remove('selected'));
+                li.classList.add('selected');
+                selectedOption = idx;
+            };
+            optionsList.appendChild(li);
+        });
+
+        timer = setInterval(() => {
+            timeLeft--;
+            document.getElementById('timeLeft').textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                autoNext();
+            }
+        }, 1000);
+    }
+
+    function autoNext() {
+        recordAnswer();
+        currentQIndex++;
+        loadQuestion();
+    }
+
+    function nextQuestion() {
+        clearInterval(timer);
+        recordAnswer();
+        currentQIndex++;
+        loadQuestion();
+    }
+
+    function recordAnswer() {
+        const correctAnsIdx = questions[currentQIndex].answer;
+        let chosen = selectedOption;
+        
+        studentAnswers.push({
+            q: questions[currentQIndex].q,
+            options: questions[currentQIndex].options,
+            chosen: chosen,
+            correct: correctAnsIdx
+        });
+
+        if (chosen === null || chosen !== correctAnsIdx) {
+            wrongAnswers++;
+        } else {
+            score++;
+        }
+        updateLiveScore();
+    }
+
+    function updateLiveScore() {
+        let sub = submissions.find(s => s.mobile === currentStudent.mobile);
+        if (sub) {
+            sub.correct = score;
+            sub.wrong = wrongAnswers;
+            sub.totalMarks = score;
+            localStorage.setItem('mockSubmissions_test8', JSON.stringify(submissions));
+        }
+    }
+
+    function finishQuiz() {
+        document.getElementById('quizBox').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+
+        let sub = submissions.find(s => s.mobile === currentStudent.mobile);
+        if (sub) {
+            sub.status = "Completed";
+            sub.answersDetail = studentAnswers;
+            localStorage.setItem('mockSubmissions_test8', JSON.stringify(submissions));
+
+            document.getElementById('fsName').value = sub.name;
+            document.getElementById('fsMobile').value = sub.mobile;
+            document.getElementById('fsDistrict').value = sub.district;
+            document.getElementById('fsTestNo').value = sub.testNo;
+            document.getElementById('fsCorrect').value = sub.correct;
+            document.getElementById('fsWrong').value = sub.wrong;
+            document.getElementById('fsMarks').value = sub.totalMarks;
+
+            fetch(document.getElementById('quizForm').action, {
+                method: 'POST',
+                body: new FormData(document.getElementById('quizForm')),
+                headers: { 'Accept': 'json' }
+            }).catch(err => console.log('Formspree sync error:', err));
+        }
+    }
+
+    function showResultModal() {
+        const msgBox = document.getElementById('successMsg');
+        const resContainer = document.getElementById('resultContainer');
+        msgBox.style.display = 'none';
+        resContainer.style.display = 'block';
+
+        let sub = submissions.find(s => s.mobile === currentStudent.mobile);
+        
+        let html = `<h2 style="color: #0056b3; text-align: center;">Performance & Answer Sheet</h2>`;
+        html += `<div style="background: #e9ecef; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-size: 15px;">
+            👤 <b>Name:</b> ${sub.name} | 📱 <b>Mobile:</b> ${sub.mobile} | 📍 <b>District:</b> ${sub.district} | 📝 <b>Test:</b> ${sub.testNo}<br>
+            ✅ <b>Correct Answers:</b> <span style="color:green; font-weight:bold;">${sub.correct}</span> | 
+            ❌ <b>Wrong Answers:</b> <span style="color:red; font-weight:bold;">${sub.wrong}</span> | 
+            🏆 <b>Total Marks:</b> <span style="color:#0056b3; font-weight:bold;">${sub.totalMarks} / 14</span>
+        </div>`;
+
+        sub.answersDetail.forEach((item, index) => {
+            let isCorrect = item.chosen === item.correct;
+            let cardClass = isCorrect ? 'correct' : 'wrong';
+            
+            html += `<div class="ans-card ${cardClass}">
+                <strong>Q${index + 1}: ${item.q}</strong><br><ul style="list-style-type:none; padding:0; margin:8px 0;">`;
+            
+            item.options.forEach((opt, oIdx) => {
+                let badge = "";
+                if (oIdx === item.correct) {
+                    badge = " <span style='color:green; font-weight:bold;'>✔ (Correct Answer)</span>";
+                }
+                if (oIdx === item.chosen && oIdx !== item.correct) {
+                    badge = " <span style='color:red; font-weight:bold;'>❌ (Your Answer)</span>";
+                } else if (oIdx === item.chosen && oIdx === item.correct) {
+                    badge = " <span style='color:green; font-weight:bold;'>✔ (Your Answer)</span>";
+                }
+                html += `<li style="padding: 3px 0;">• ${opt} ${badge}</li>`;
+            });
+
+            html += `</ul></div>`;
+        });
+
+        // Paid Group Promotion Box added after results
+        html += `<div class="promo-box">
+            <strong>Mock Test Continue korte chan?</strong><br><br>
+            Mock Test niyomito dite hole matro ₹500 ekkalin diye amader Paid Group-e jukto thakun.<br><br>
+            Paid Group-e thakle paben—<br>
+            ✅ Syllabus onujayi MCQ<br>
+            ✅ Notes<br>
+            ✅ Detailed Notes<br>
+            ✅ Guruttopurno Question & Answer<br>
+            ✅ Niyomito Mock Test<br><br>
+            📱 Jogajog: 9932948196<br><br>
+            👉 Paid Group-e Join korte nicher WhatsApp-e click kore Message korun.<br>
+            <a href="https://wa.me/919932948196?utm_source=chatgpt.com" target="_blank">💬 Join Paid Group via WhatsApp</a>
+        </div>`;
+
+        html += `<div style="text-align: center; margin-top: 25px; font-weight: bold; color: #0056b3; font-size: 16px;">
+            BENGAL EDUCATIONAL NEWS<br>
+            <span style="font-size: 13px; color: #555;">Librarian howar shopne, sothik prostutir songe.</span>
+        </div>`;
+
+        resContainer.innerHTML = html;
+    }
+
+    function loadAdminTable() {
+        const tbody = document.getElementById('adminTableBody');
+        tbody.innerHTML = '';
+
+        if (submissions.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:#777;">No student records found.</td></tr>`;
+            return;
+        }
+
+        submissions.forEach((sub, index) => {
+            let statusBadge = sub.status === 'Completed'
+                ? `<span style="background: #28a745; color: white; padding: 3px 8px; border-radius: 3px; font-size: 11px;">Completed</span>`
+                : `<span style="background: #ffc107; color: black; padding: 3px 8px; border-radius: 3px; font-size: 11px;">In Progress</span>`;
+
+            const row = `<tr>
+                <td>${index + 1}</td>
+                <td><b>${sub.name}</b></td>
+                <td>${sub.mobile}</td>
+                <td>${sub.district}</td>
+                <td>${sub.testNo}</td>
+                <td style="color: green; font-weight: bold;">${sub.correct}</td>
+                <td style="color: red; font-weight: bold;">${sub.wrong}</td>
+                <td style="font-weight: bold; color: #0056b3;">${sub.totalMarks} / 14</td>
+                <td>${statusBadge}</td>
+                <td>${sub.date}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+</script>
+
+</body>
+</html>
